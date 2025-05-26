@@ -1,0 +1,116 @@
+# windsruffile.yml  – draft rules for `discovery-compliance-analyzer` MVP
+# ---------------------------------------------------------------------
+project:
+  name: discovery-compliance-analyzer
+  language: python
+  python:
+    min_version: "3.11"
+    runtime_constraint: "CPython"
+  license: MIT
+  default_branch: main
+
+env:
+  virtualenv: ".venv"
+  dotenv_example: ".env.example"
+
+dependencies:
+  manager: pip
+  lockfile: requirements.txt
+  allow_prerelease: false
+  security_scan:
+    tool: pip-audit           # fast SBoM scan
+    severity_threshold: medium
+  pinned_hashes: true
+
+formatter:
+  tool: black
+  version: ">=24.0"           # 2024+ black (supports Ruff fmt)
+  line_length: 88
+  preview: false
+
+linter:
+  tool: ruff
+  version: ">=0.4.0"
+  config: |
+    [lint]
+    ignore = ["E501"]         # line length handled by black
+    target-version = "py311"
+    select = ["E", "F", "I", "B", "UP", "CI"]
+  fail_on: error              # CI fails if Ruff finds error-level issues
+
+typing:
+  tool: pyright
+  strict: false               # gradual typing; warn, don’t fail CI
+  allow_untyped_defs: true
+
+tests:
+  runner: pytest
+  min_coverage: 80
+  markers:
+    unit: "fast, isolated"
+  use_xdist: true
+
+build:
+  tasks:
+    # 1. static
+    - id: lint
+      run: ruff check .
+    - id: format
+      run: black --check .
+    - id: typecheck
+      run: pyright
+    # 2. tests
+    - id: test
+      run: pytest -q
+    # 3. docs (optional once docs added)
+    - id: docs
+      run: |
+        mkdocs build --strict
+      when: changed(paths=["docs/**"])
+
+git:
+  hooks:                       # auto-installed by `pre-commit`
+    pre-commit:
+      - format                 # black
+      - lint                   # ruff
+    pre-push:
+      - test                   # pytest short run
+
+commit_convention:
+  type_scope_required: false
+  pattern: >
+    ^(feat|fix|docs|refactor|test|chore)(\([a-z\-]+\))?!?:\s[A-Z].{1,70}
+  example: "feat(extractor): add OCR fallback"
+
+branching:
+  strategy: trunk-based
+  protected_branches: ["main"]
+  feature_prefix: "feat/"
+  hotfix_prefix: "hotfix/"
+
+ci:
+  provider: github-actions
+  workflows:
+    default:
+      on: [push, pull_request]
+      jobs:
+        build:
+          runs-on: ubuntu-latest
+          steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              with:
+                python-version: "3.11"
+            - run: pip install -r requirements.txt
+            - run: winds run lint format typecheck test
+          timeout-minutes: 20
+
+artifact_rules:
+  - path: reports/**
+    on_success_only: true
+
+release:
+  versioning: semver
+  tag_prefix: v
+  changelog:
+    generator: conventional-commits

@@ -1,0 +1,142 @@
+{
+    "case_meta": {
+      "court": "Snohomish County Superior Court",
+      "cause_no": "25-3-00286-31",
+      "case_type": "Dissolution with Children"
+    },
+  
+    "timeline": {
+    "marriage_start": "2003-09-26",
+    "separation": "2024-07-30",
+    "petition_filed": "2025-02-11",
+    "financial_window_start": "2023-01-01",
+    "financial_window_end": "2025-05-01",
+    "financial_window_years": 2
+    },
+  
+    "children": {
+      "minor": {
+        "name": "Ty",
+        "age_years": 15,
+        "grade": 9,
+        "key_issues": ["schedule", "education", "music activities", "shared decision-making"]
+      },
+      "adult_with_LRA": {
+        "name": "Jet",
+        "age_years": 20,
+        "LRA_active": true,
+        "LRA_period": "2025-04-23 to 2025-07-22"
+      }
+    },
+  
+    "parenting": {
+      "current_schedule": "70/30 Temporary Parenting Plan",
+      "schedule_start": "2024-07-30",
+      "decision_making": "Joint – no tie-breaker"
+    },
+  
+    "financial_context": {
+      "estate_size": "modest",
+      "estimated_estate_total_assets": 200000,
+      "estimated_estate_total_liabilities": 60000,
+      "real_property_owned": false,
+      "consumer_auto_debt_est": 60000,
+      
+    },
+  
+    "party_resources": {
+      "petitioner": {
+        "pro_se": true,
+        "annual_income_est": 0,
+        "occupation": "Pre-revenue tech consulting start-up founder"
+      },
+      "respondent": {
+        "represented": true,
+        "annual_income_est": 120000,
+        "occupation": "Licensed massage practitioner"
+      },
+      "resource_gap_high": true
+    },
+  
+    "discovery_context": {
+      "automatic_disclosures": true,           
+      "discovery_cutoff_days_before_trial": 14 
+    }
+
+
+    "claims": {
+  "parenting": {
+    "contested": false,
+    "stipulated_tpp": {
+      "approved_date": "2025-05-08",     
+      "residential_ratio": "70/30",
+      "note": "No pending motions to modify; parenting schedule and decision-making currently settled by stipulation."
+    }
+
+  "child_support": {
+    "contested": true,
+    "sub_issues": [
+      "income_imputation",
+      "education_expenses",
+      "post_secondary_support",
+      "adult_dependent_child_support",
+      "extracurricular_costs"
+    ],
+    "pleading_source": "Petition §18 (requests proportional expenses, post-secondary, uncovered medical); Response §18 (disagrees)" 
+  },
+
+  "spousal_support": {
+    "contested": true,
+    "requested_by": "Petitioner",
+    "pleading_source": "Petition §10 (needs maintenance); Response §10 (disagrees – voluntary unemployment claim)" 
+  },
+
+  "property_division": {
+    "contested": true,
+    "sub_issues": [
+      "equitable_division_personal_property",
+      "suspected_foreign_assets",
+      "high_risk_trades",
+      "undisclosed_assets"
+    ],
+    "pleading_source": "Petition §§7-8 (no real property, asks equitable division & after-discovered assets); Response §8 (agrees equitable but objects to specifics)" 
+  },
+
+  "debt_allocation": {
+    "contested": true,
+    "sub_issues": [
+      "post_separation_debt_responsibility",
+      "consumer_auto_debt_split"
+    ],
+    "pleading_source": "Petition §9 (each spouse post-separation); Response §9 (disagrees – wants equitable allocation)" 
+  },
+
+  "attorney_fees_intransigence": {
+    "contested": true,
+    "requested_by": "Petitioner",
+    "pleading_source": "Petition §11 (asks Respondent to pay fees); Response §11 (disagrees)"           
+  },
+
+  "maintenance_other": {
+    "contested": false
+  },
+
+  "protection_order": {
+    "contested": false
+  },
+
+  "restraining_order": {
+    "contested": false
+  },
+
+  "relocation": {
+    "contested": false
+  },
+
+  "mental_health_claims": {
+    "no_mental_health_claims": true
+  }
+}
+
+  }
+  
